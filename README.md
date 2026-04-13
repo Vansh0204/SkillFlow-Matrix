@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SkillFlow Matrix 🚀
 
-## Getting Started
+A premium Team Skill Matrix Graph built with Next.js 14, TypeScript, Tailwind CSS, and React Flow. This application allows teams to visualize, manage, and analyze their collective technical capabilities in an immersive, interactive graph environment.
 
-First, run the development server:
+## ✨ Features
+
+- **Interactive Skill Graph**: Built on React Flow with a custom physics-based layout (Dagre).
+- **Intelligent Focus**: Selecting a node automatically dims unrelated connections, allowing you to focus on specific individuals or skill networks.
+- **Dynamic Analysis**: 
+  - **Skill Gaps**: Automatically identifies "Single Points of Failure" (skills only one person knows).
+  - **Polymath Tracking**: Highlights top contributors with the broadest skill sets.
+  - **Capability Leaders**: Shows the most prevalent skills within the team.
+- **Full CRUD Support**: 
+  - Add/Edit/Delete team members and skills.
+  - Link people to skills with granular proficiency levels: **Learning**, **Familiar**, or **Expert**.
+- **State Persistence**: All changes and node positions are persisted via `localStorage`.
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS
+- **Visualization**: @xyflow/react (React Flow)
+- **Layouting**: Dagre
+- **Icons**: Lucide React
+- **Animations**: Tailwind Animate + Framer Motion
+
+## 🚀 Getting Started
+
+### 1. Installation
+
+Clone the repository and install dependencies:
+
+```bash
+npm install
+```
+
+### 2. Development Mode
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 📦 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `/app`: Next.js App Router and global styles.
+- `/components`:
+  - `SkillMatrixGraph`: Core canvas and orchestration.
+  - `DetailPanel`: Deep-dive inspector and inline editor.
+  - `CRUDPanel`: Panel for adding new data points.
+  - `SummaryPanel`: Real-time analytics and skill gap analysis.
+- `/lib`:
+  - `types`: TypeScript interfaces.
+  - `seedData`: Sample dataset.
+  - `storage`: LocalStorage persistence logic.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Created with ❤️ using Antigravity.
