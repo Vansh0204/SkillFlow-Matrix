@@ -197,6 +197,23 @@ export default function SkillMatrixGraph() {
     }));
 
     const layoutedNodes = getLayoutedElements(initialNodes, initialEdges);
+    
+    // PERSISTENCE LOCK: Save any newly calculated positions immediately
+    // to prevent the "jumping" behavior when adding connections.
+    const currentStored = getNodePositions();
+    let hasNewPositions = false;
+    
+    layoutedNodes.forEach(node => {
+      if (!currentStored[node.id]) {
+        currentStored[node.id] = node.position;
+        hasNewPositions = true;
+      }
+    });
+
+    if (hasNewPositions) {
+      saveNodePositions(currentStored);
+    }
+
     setNodes(layoutedNodes);
     setEdges(initialEdges);
   }, [setNodes, setEdges, getLayoutedElements, handleNodeDelete]);
