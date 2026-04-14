@@ -94,8 +94,8 @@ const PROFICIENCY_COLORS: Record<string, string> = {
 };
 
 export default function SkillMatrixGraph() {
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [fullData, setFullData] = useState<GraphData | null>(null);
   
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -135,6 +135,24 @@ export default function SkillMatrixGraph() {
         },
       };
     });
+  }, []);
+
+  const handleNodeDelete = useCallback((id: string, type: 'person' | 'skill') => {
+    setFullData(prev => {
+      if (!prev) return null;
+      const newData = { ...prev };
+      if (type === 'person') {
+        newData.people = newData.people.filter(p => p.id !== id);
+        newData.connections = newData.connections.filter(c => c.personId !== id);
+      } else {
+        newData.skills = newData.skills.filter(s => s.id !== id);
+        newData.connections = newData.connections.filter(c => c.skillId !== id);
+      }
+      
+      saveGraphData(newData);
+      return newData;
+    });
+    setSelectedId(null);
   }, []);
 
   const refreshFlow = useCallback((data: GraphData) => {
@@ -181,32 +199,18 @@ export default function SkillMatrixGraph() {
     const layoutedNodes = getLayoutedElements(initialNodes, initialEdges);
     setNodes(layoutedNodes);
     setEdges(initialEdges);
-  }, [setNodes, setEdges, getLayoutedElements]);
-
-  const handleNodeDelete = useCallback((id: string, type: 'person' | 'skill') => {
-    setFullData(prev => {
-      if (!prev) return null;
-      const newData = { ...prev };
-      if (type === 'person') {
-        newData.people = newData.people.filter(p => p.id !== id);
-        newData.connections = newData.connections.filter(c => c.personId !== id);
-      } else {
-        newData.skills = newData.skills.filter(s => s.id !== id);
-        newData.connections = newData.connections.filter(c => c.skillId !== id);
-      }
-      
-      saveGraphData(newData);
-      setTimeout(() => refreshFlow(newData), 0);
-      return newData;
-    });
-    setSelectedId(null);
-  }, [refreshFlow]);
+  }, [setNodes, setEdges, getLayoutedElements, handleNodeDelete]);
 
   useEffect(() => {
     const data = getGraphData();
     setFullData(data);
-    refreshFlow(data);
-  }, [refreshFlow]);
+  }, []);
+
+  useEffect(() => {
+    if (fullData) {
+        refreshFlow(fullData);
+    }
+  }, [fullData, refreshFlow]);
 
   const onNodeClick = (_: any, node: Node) => {
     setSelectedId(node.id);
@@ -222,7 +226,6 @@ export default function SkillMatrixGraph() {
   const handleUpdate = (updatedData: GraphData) => {
     setFullData(updatedData);
     saveGraphData(updatedData);
-    refreshFlow(updatedData);
   };
 
   // Highlighting/Dimming Logic
@@ -257,7 +260,7 @@ export default function SkillMatrixGraph() {
             style: { ...e.style, opacity: isConnected ? 1 : 0.1 }
         };
     }));
-  }, [selectedId, edges.length, setNodes, setEdges]);
+  }, [selectedId, edges, setNodes, setEdges]);
 
   if (!fullData) return <div className="flex items-center justify-center h-screen bg-slate-950 text-white">Loading Matrix...</div>;
 
