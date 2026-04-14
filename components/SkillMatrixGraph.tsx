@@ -290,7 +290,7 @@ export default function SkillMatrixGraph() {
         // Update nodes opacity
         setNodes(nds => nds.map(n => ({
             ...n,
-            style: { ...n.style, opacity: connectedNodeIds.has(n.id) ? 1 : 0.15 }
+            style: { ...n.style, opacity: connectedNodeIds.has(n.id) ? 1 : 0.4 }
         })));
 
         // Return updated edges
@@ -300,7 +300,12 @@ export default function SkillMatrixGraph() {
             const isConnected = sId === selectedId || tId === selectedId;
             return {
                 ...e,
-                style: { ...e.style, opacity: isConnected ? 1 : 0.1 }
+                style: { 
+                    ...e.style, 
+                    opacity: isConnected ? 1 : 0.2,
+                    strokeWidth: isConnected ? 5 : 2
+                },
+                animated: isConnected
             };
         });
     });
