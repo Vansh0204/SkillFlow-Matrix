@@ -358,6 +358,8 @@ export default function SkillMatrixGraph() {
             snapToGrid
             snapGrid={[15, 15]}
             colorMode="dark"
+            minZoom={0.05}
+            maxZoom={2}
           >
             <Background color="#ffffff" gap={20} size={1.2} variant={"dots" as any} style={{ opacity: 0.3 }} />
             <Controls />
