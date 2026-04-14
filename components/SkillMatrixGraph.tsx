@@ -314,11 +314,11 @@ export default function SkillMatrixGraph() {
             <Background color="#ffffff" gap={20} size={1.2} variant={"dots" as any} style={{ opacity: 0.3 }} />
             <Controls />
             <MiniMap 
-              nodeColor={(node) => node.type === 'person' ? '#818cf8' : '#34d399'}
-              maskColor="rgba(15, 23, 42, 0.7)"
-              style={{ backgroundColor: '#1e293b', borderRadius: '8px' }}
+              nodeColor={(node) => node.type === 'person' ? '#fb7185' : '#2dd4bf'}
+              maskColor="rgba(10, 6, 20, 0.7)"
+              style={{ backgroundColor: '#0a0614', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}
             />
-            <Panel position="bottom-left" className="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 backdrop-blur-xl shadow-2xl mb-8 ml-8">
+            <Panel position="bottom-left" className="bg-slate-900/40 p-4 rounded-2xl border border-white/5 backdrop-blur-xl shadow-2xl mb-8 ml-8">
               <div className="flex gap-4">
                 {Object.entries(PROFICIENCY_COLORS).map(([level, color]) => (
                   <div key={level} className="flex items-center gap-2">
