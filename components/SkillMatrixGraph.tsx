@@ -383,15 +383,7 @@ export default function SkillMatrixGraph() {
           onUpdate={handleUpdate}
         />
 
-        {selectedId && (
-          <div 
-            className="fixed inset-0 bg-slate-950/40 backdrop-blur-[2px] z-40 animate-in fade-in duration-300" 
-            onClick={() => {
-              setSelectedId(null);
-              setSelectedType(null);
-            }}
-          />
-        )}
+
 
         <SummaryPanel data={fullData} />
       </main>
