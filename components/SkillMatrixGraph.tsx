@@ -34,7 +34,7 @@ const PersonNode = ({ data, selected }: any) => {
       <Handle 
         type="target" 
         position={Position.Left} 
-        style={{ left: '-4px', width: '8px', height: '8px', background: 'transparent', border: 'none' }} 
+        style={{ left: '-12px', width: '10px', height: '10px', background: 'transparent', border: 'none' }} 
       />
       <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-full border-2 bg-slate-950 transition-all hover:scale-105 ${
         selected 
@@ -50,7 +50,7 @@ const PersonNode = ({ data, selected }: any) => {
       <Handle 
         type="source" 
         position={Position.Right} 
-        style={{ right: '-4px', width: '8px', height: '8px', background: 'transparent', border: 'none' }} 
+        style={{ right: '-12px', width: '10px', height: '10px', background: 'transparent', border: 'none' }} 
       />
       
       <button 
@@ -69,7 +69,7 @@ const SkillNode = ({ data, selected }: any) => {
       <Handle 
         type="target" 
         position={Position.Left} 
-        style={{ left: '-4px', width: '8px', height: '8px', background: 'transparent', border: 'none' }} 
+        style={{ left: '-12px', width: '10px', height: '10px', background: 'transparent', border: 'none' }} 
       />
       <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-2xl border-2 bg-slate-950 transition-all hover:scale-105 ${
         selected 
@@ -85,7 +85,7 @@ const SkillNode = ({ data, selected }: any) => {
       <Handle 
         type="source" 
         position={Position.Right} 
-        style={{ right: '-4px', width: '8px', height: '8px', background: 'transparent', border: 'none' }} 
+        style={{ right: '-12px', width: '10px', height: '10px', background: 'transparent', border: 'none' }} 
       />
       
       <button 
@@ -208,6 +208,8 @@ export default function SkillMatrixGraph() {
       markerEnd: {
         type: MarkerType.ArrowClosed,
         color: PROFICIENCY_COLORS[c.proficiency],
+        width: 25,
+        height: 25,
       },
       animated: true,
     }));
