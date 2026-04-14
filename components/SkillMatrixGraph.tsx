@@ -31,19 +31,19 @@ import SummaryPanel from './SummaryPanel';
 const PersonNode = ({ data, selected }: any) => {
   return (
     <div className={`relative group animate-in zoom-in fade-in duration-500 fill-mode-backwards transition-all ${selected ? 'z-50' : 'z-10'}`}>
-      <Handle type="target" position={Position.Left} className="w-2 h-2 bg-indigo-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
-      <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-full border-2 bg-slate-900 transition-all hover:scale-110 ${
+      <Handle type="target" position={Position.Left} className="w-2 h-2 bg-rose-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-full border-2 bg-slate-900/80 backdrop-blur-sm transition-all hover:scale-110 ${
         selected 
-          ? 'border-indigo-400 shadow-[0_0_30px_rgba(99,102,241,0.6)] scale-110' 
-          : 'border-indigo-400/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]'
+          ? 'border-rose-400 shadow-[0_0_30px_rgba(251,113,133,0.6)] scale-110' 
+          : 'border-rose-400/30 shadow-[0_0_15px_rgba(251,113,133,0.1)]'
       }`}>
-        <div className={`p-2 rounded-full mb-1 transition-colors ${selected ? 'bg-indigo-500 text-white' : 'bg-indigo-500/10 text-indigo-400'}`}>
+        <div className={`p-2 rounded-full mb-1 transition-colors ${selected ? 'bg-rose-500 text-white' : 'bg-rose-500/10 text-rose-400'}`}>
           <Users size={16} />
         </div>
         <div className="text-[10px] font-bold text-white text-center px-2 truncate w-full">{data.name}</div>
-        <div className="text-[8px] text-slate-500 text-center truncate w-full px-2">{data.role}</div>
+        <div className="text-[8px] text-slate-400 text-center truncate w-full px-2">{data.role}</div>
       </div>
-      <Handle type="source" position={Position.Right} className="w-2 h-2 bg-indigo-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
+      <Handle type="source" position={Position.Right} className="w-2 h-2 bg-rose-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
       
       <button 
         onClick={(e) => { e.stopPropagation(); data.onDelete(); }}
@@ -58,19 +58,19 @@ const PersonNode = ({ data, selected }: any) => {
 const SkillNode = ({ data, selected }: any) => {
   return (
     <div className={`relative group animate-in zoom-in fade-in duration-500 fill-mode-backwards transition-all ${selected ? 'z-50' : 'z-10'}`}>
-      <Handle type="target" position={Position.Left} className="w-2 h-2 bg-emerald-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
-      <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-2xl border-2 bg-slate-900 transition-all hover:scale-110 ${
+      <Handle type="target" position={Position.Left} className="w-2 h-2 bg-teal-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-2xl border-2 bg-slate-900/80 backdrop-blur-sm transition-all hover:scale-110 ${
         selected 
-          ? 'border-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.6)] scale-110' 
-          : 'border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]'
+          ? 'border-teal-400 shadow-[0_0_30px_rgba(45,212,191,0.6)] scale-110' 
+          : 'border-teal-400/30 shadow-[0_0_15px_rgba(45,212,191,0.1)]'
       }`}>
-        <div className={`p-2 rounded-lg mb-1 transition-colors ${selected ? 'bg-emerald-500 text-white' : 'bg-emerald-500/10 text-emerald-400'}`}>
+        <div className={`p-2 rounded-lg mb-1 transition-colors ${selected ? 'bg-teal-500 text-white' : 'bg-teal-500/10 text-teal-400'}`}>
           <Code2 size={16} />
         </div>
         <div className="text-[10px] font-bold text-white text-center px-2 truncate w-full">{data.name}</div>
-        <div className="text-[8px] text-slate-500 text-center truncate w-full px-2">{data.category}</div>
+        <div className="text-[8px] text-slate-400 text-center truncate w-full px-2">{data.category}</div>
       </div>
-      <Handle type="source" position={Position.Right} className="w-2 h-2 bg-emerald-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
+      <Handle type="source" position={Position.Right} className="w-2 h-2 bg-teal-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
       
       <button 
         onClick={(e) => { e.stopPropagation(); data.onDelete(); }}
@@ -88,9 +88,9 @@ const nodeTypes = {
 };
 
 const PROFICIENCY_COLORS: Record<string, string> = {
-  learning: '#facc15',
-  familiar: '#60a5fa',
-  expert: '#4ade80',
+  learning: '#ffedd5', // Pale Peach
+  familiar: '#e9d5ff', // Lavender
+  expert: '#bbf7d0',   // Spring Green
 };
 
 export default function SkillMatrixGraph() {
@@ -274,17 +274,17 @@ export default function SkillMatrixGraph() {
   if (!fullData) return <div className="flex items-center justify-center h-screen bg-slate-950 text-white">Loading Matrix...</div>;
 
   return (
-    <div className="flex flex-col h-screen bg-slate-950 text-slate-100 font-sans overflow-hidden">
-      <header className="flex items-center justify-between px-8 py-6 bg-slate-900/50 border-b border-slate-800 backdrop-blur-md z-10">
+    <div className="flex flex-col h-screen bg-[#0a0614] text-slate-100 font-sans overflow-hidden">
+      <header className="flex items-center justify-between px-8 py-6 bg-slate-900/30 border-b border-white/5 backdrop-blur-md z-10">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-indigo-500/10 rounded-xl border border-indigo-500/20">
-            <Layers className="text-indigo-400 w-6 h-6" />
+          <div className="p-2 bg-rose-500/10 rounded-xl border border-rose-500/20">
+            <Layers className="text-rose-400 w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-rose-100 to-teal-100 bg-clip-text text-transparent">
               SkillFlow Matrix
             </h1>
-            <p className="text-xs text-slate-500 font-medium tracking-widest uppercase">Dynamic Capability Graph</p>
+            <p className="text-xs text-slate-500 font-medium tracking-widest uppercase">Deep Quartz Capability Graph</p>
           </div>
         </div>
       </header>
@@ -292,7 +292,7 @@ export default function SkillMatrixGraph() {
       <main className="relative flex-1 flex overflow-hidden">
         <CRUDPanel data={fullData} onUpdate={handleUpdate} />
 
-        <div className="flex-1 relative bg-slate-950">
+        <div className="flex-1 relative bg-[#0a0614]">
           <ReactFlow
             nodes={nodes}
             edges={edges}
@@ -311,7 +311,7 @@ export default function SkillMatrixGraph() {
             snapGrid={[15, 15]}
             colorMode="dark"
           >
-            <Background color="#334155" gap={20} />
+            <Background color="#ffffff" gap={20} size={1} variant={"dots" as any} style={{ opacity: 0.15 }} />
             <Controls />
             <MiniMap 
               nodeColor={(node) => node.type === 'person' ? '#818cf8' : '#34d399'}

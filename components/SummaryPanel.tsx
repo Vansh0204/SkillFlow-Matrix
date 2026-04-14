@@ -52,7 +52,7 @@ export default function SummaryPanel({ data }: SummaryPanelProps) {
 
   return (
     <div 
-      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-[800px] max-w-[95vw] bg-slate-900/90 border-t border-x border-slate-800 rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl transition-all duration-500 z-40 ${
+      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-[800px] max-w-[95vw] bg-slate-950/60 border-t border-x border-white/5 rounded-t-[2.5rem] shadow-[0_-10px_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl transition-all duration-500 z-40 ${
         isOpen ? 'h-64 translate-y-0' : 'h-12 translate-y-0'
       }`}
     >
@@ -61,8 +61,8 @@ export default function SummaryPanel({ data }: SummaryPanelProps) {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full h-12 flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-colors"
       >
-        <BarChart3 size={16} className="text-indigo-400" />
-        <span className="text-[10px] font-bold uppercase tracking-widest">Network Analytics</span>
+        <BarChart3 size={16} className="text-rose-400" />
+        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-300">Network Analytics</span>
         {isOpen ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
       </button>
 
@@ -72,29 +72,29 @@ export default function SummaryPanel({ data }: SummaryPanelProps) {
         {/* Most Common Skills */}
         <div className="space-y-4">
           <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-            <Trophy size={14} className="text-amber-400" />
+            <Trophy size={14} className="text-orange-400" />
             Top Capabilities
           </h4>
           <div className="space-y-2">
             {stats.sortedSkills.map((s, i) => (
-              <div key={i} className="flex items-center justify-between text-sm">
-                <span className="text-slate-300 font-medium truncate max-w-[120px]">{s.name}</span>
-                <span className="px-2 py-0.5 rounded-full bg-slate-800 text-[10px] font-bold text-slate-400">{s.count} masters</span>
+              <div key={i} className="flex items-center justify-between text-sm group">
+                <span className="text-slate-200 font-medium truncate max-w-[120px] group-hover:text-rose-400 transition-colors">{s.name}</span>
+                <span className="px-2 py-0.5 rounded-full bg-white/5 text-[10px] font-bold text-slate-400 border border-white/5">{s.count} masters</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Skill Gaps */}
-        <div className="space-y-4 border-x border-slate-800 px-8">
+        <div className="space-y-4 border-x border-white/5 px-8">
           <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-            <AlertTriangle size={14} className="text-red-400" />
+            <AlertTriangle size={14} className="text-rose-400" />
             Vulnerability Index
           </h4>
           <div className="flex flex-wrap gap-2">
             {stats.skillGaps.length > 0 ? (
               stats.skillGaps.slice(0, 6).map((s, i) => (
-                <span key={i} className="px-2 py-1 rounded-lg bg-red-500/10 border border-red-500/20 text-[10px] text-red-100 font-medium lowercase">
+                <span key={i} className="px-2 py-1 rounded-lg bg-rose-500/10 border border-rose-500/20 text-[10px] text-rose-100 font-medium lowercase">
                   #{s.replace(/\s+/g, '-')}
                 </span>
               ))
@@ -108,14 +108,14 @@ export default function SummaryPanel({ data }: SummaryPanelProps) {
         {/* Broadest SkillSets */}
         <div className="space-y-4">
           <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-            <Star size={14} className="text-indigo-400" />
+            <Star size={14} className="text-teal-400" />
             Polymaths
           </h4>
           <div className="space-y-2">
             {stats.sortedPeople.map((p, i) => (
-              <div key={i} className="flex items-center justify-between text-sm">
-                <span className="text-slate-300 font-medium truncate max-w-[120px]">{p.name}</span>
-                <span className="px-2 py-0.5 rounded-full bg-slate-800 text-[10px] font-bold text-slate-400">{p.count} skills</span>
+              <div key={i} className="flex items-center justify-between text-sm group">
+                <span className="text-slate-200 font-medium truncate max-w-[120px] group-hover:text-teal-400 transition-colors">{p.name}</span>
+                <span className="px-2 py-0.5 rounded-full bg-white/5 text-[10px] font-bold text-slate-400 border border-white/5">{p.count} skills</span>
               </div>
             ))}
           </div>

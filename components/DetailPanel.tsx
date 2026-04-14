@@ -14,9 +14,9 @@ interface DetailPanelProps {
 }
 
 const PROFICIENCY_COLORS: Record<string, { bg: string; text: string; label: string }> = {
-  learning: { bg: 'bg-yellow-500/10', text: 'text-yellow-500', label: 'Learning' },
-  familiar: { bg: 'bg-blue-500/10', text: 'text-blue-500', label: 'Familiar' },
-  expert: { bg: 'bg-emerald-500/10', text: 'text-emerald-500', label: 'Expert' },
+  learning: { bg: 'bg-orange-400/10', text: 'text-orange-400', label: 'Learning' },
+  familiar: { bg: 'bg-purple-400/10', text: 'text-purple-400', label: 'Familiar' },
+  expert: { bg: 'bg-teal-400/10', text: 'text-teal-400', label: 'Expert' },
 };
 
 export default function DetailPanel({
@@ -85,14 +85,14 @@ export default function DetailPanel({
 
   return (
     <div 
-      className={`fixed inset-y-0 right-0 w-96 bg-slate-900/95 border-l border-slate-800 shadow-2xl backdrop-blur-xl transform transition-transform duration-500 ease-in-out z-50 ${
+      className={`fixed inset-y-0 right-0 w-96 bg-slate-950/60 border-l border-white/5 shadow-2xl backdrop-blur-2xl transform transition-transform duration-500 ease-in-out z-50 ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
       <div className="h-full flex flex-col p-8 overflow-y-auto scrollbar-hide">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <div className={`p-3 rounded-2xl ${selectedType === 'person' ? 'bg-indigo-500/10 text-indigo-400' : 'bg-emerald-500/10 text-emerald-400'}`}>
+          <div className={`p-3 rounded-2xl ${selectedType === 'person' ? 'bg-rose-500/10 text-rose-400' : 'bg-teal-500/10 text-teal-400'}`}>
             {selectedType === 'person' ? <User size={24} /> : <Code2 size={24} />}
           </div>
           <button 
@@ -131,14 +131,14 @@ export default function DetailPanel({
                 <div className="flex gap-2">
                     <button 
                         onClick={handleSave}
-                        className="flex-1 flex items-center justify-center gap-2 py-3 bg-indigo-500 hover:bg-indigo-400 text-white rounded-xl font-bold shadow-lg shadow-indigo-500/20 transition-all active:scale-95"
+                        className="flex-1 flex items-center justify-center gap-2 py-3 bg-rose-500 hover:bg-rose-400 text-white rounded-xl font-bold shadow-lg shadow-rose-500/20 transition-all active:scale-95"
                     >
                         <Check size={18} />
                         <span>Save</span>
                     </button>
                     <button 
                         onClick={() => setIsEditing(false)}
-                        className="px-6 py-3 bg-slate-800 text-slate-300 rounded-xl font-bold hover:bg-slate-700 transition-all"
+                        className="px-6 py-3 bg-slate-900 text-slate-300 rounded-xl font-bold hover:bg-slate-800 transition-all border border-white/5"
                     >
                         Cancel
                     </button>
@@ -146,7 +146,7 @@ export default function DetailPanel({
               </div>
             ) : (
               <div className="group relative">
-                <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider mb-2 ${selectedType === 'person' ? 'bg-indigo-500/10 text-indigo-400' : 'bg-emerald-500/10 text-emerald-400'}`}>
+                <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider mb-2 ${selectedType === 'person' ? 'bg-rose-500/10 text-rose-400' : 'bg-teal-500/10 text-teal-400'}`}>
                   {selectedType}
                 </span>
                 <h2 className="text-3xl font-bold text-white tracking-tight leading-tight">{selectedItem.name}</h2>
@@ -154,7 +154,7 @@ export default function DetailPanel({
                 
                 <button 
                   onClick={() => setIsEditing(true)}
-                  className="mt-6 flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-indigo-400 transition-colors bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700/50 hover:border-indigo-500/50 group"
+                  className="mt-6 flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-rose-400 transition-colors bg-slate-900/50 px-4 py-2 rounded-lg border border-white/5 hover:border-rose-500/50 group"
                 >
                   <Edit3 size={16} className="group-hover:rotate-12 transition-transform" />
                   Edit Detail
