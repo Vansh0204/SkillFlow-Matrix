@@ -311,7 +311,7 @@ export default function SkillMatrixGraph() {
             snapGrid={[15, 15]}
             colorMode="dark"
           >
-            <Background color="#ffffff" gap={20} size={1} variant={"dots" as any} style={{ opacity: 0.15 }} />
+            <Background color="#ffffff" gap={20} size={1.2} variant={"dots" as any} style={{ opacity: 0.3 }} />
             <Controls />
             <MiniMap 
               nodeColor={(node) => node.type === 'person' ? '#818cf8' : '#34d399'}
