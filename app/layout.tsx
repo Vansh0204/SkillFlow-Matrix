@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { DM_Serif_Display, JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
