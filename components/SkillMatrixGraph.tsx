@@ -31,11 +31,16 @@ import SummaryPanel from './SummaryPanel';
 const PersonNode = ({ data, selected }: any) => {
   return (
     <div className={`relative group animate-in zoom-in fade-in duration-500 fill-mode-backwards transition-all ${selected ? 'z-50' : 'z-10'}`}>
-      <Handle type="target" position={Position.Left} className="w-2 h-2 bg-rose-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
-      <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-full border-2 bg-slate-900/80 backdrop-blur-sm transition-all hover:scale-110 ${
+      <Handle 
+        type="target" 
+        position={Position.Left} 
+        className="invisible group-hover:visible"
+        style={{ left: '0px', width: '8px', height: '8px', background: 'transparent' }} 
+      />
+      <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-full border-2 bg-slate-950 transition-all hover:scale-105 ${
         selected 
-          ? 'border-rose-400 shadow-[0_0_30px_rgba(251,113,133,0.6)] scale-110' 
-          : 'border-rose-400/30 shadow-[0_0_15px_rgba(251,113,133,0.1)]'
+          ? 'border-rose-400 shadow-[0_0_30px_rgba(251,113,133,0.6)] scale-105' 
+          : 'border-rose-400/30'
       }`}>
         <div className={`p-2 rounded-full mb-1 transition-colors ${selected ? 'bg-rose-500 text-white' : 'bg-rose-500/10 text-rose-400'}`}>
           <Users size={16} />
@@ -43,7 +48,12 @@ const PersonNode = ({ data, selected }: any) => {
         <div className="text-[10px] font-serif font-bold text-white text-center px-2 truncate w-full">{data.name}</div>
         <div className="text-[8px] font-mono text-slate-400 text-center truncate w-full px-2 uppercase tracking-tighter">{data.role}</div>
       </div>
-      <Handle type="source" position={Position.Right} className="w-2 h-2 bg-rose-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
+      <Handle 
+        type="source" 
+        position={Position.Right} 
+        className="invisible group-hover:visible"
+        style={{ right: '0px', width: '8px', height: '8px', background: 'transparent' }} 
+      />
       
       <button 
         onClick={(e) => { e.stopPropagation(); data.onDelete(); }}
@@ -58,11 +68,16 @@ const PersonNode = ({ data, selected }: any) => {
 const SkillNode = ({ data, selected }: any) => {
   return (
     <div className={`relative group animate-in zoom-in fade-in duration-500 fill-mode-backwards transition-all ${selected ? 'z-50' : 'z-10'}`}>
-      <Handle type="target" position={Position.Left} className="w-2 h-2 bg-teal-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
-      <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-2xl border-2 bg-slate-900/80 backdrop-blur-sm transition-all hover:scale-110 ${
+      <Handle 
+        type="target" 
+        position={Position.Left} 
+        className="invisible group-hover:visible"
+        style={{ left: '0px', width: '8px', height: '8px', background: 'transparent' }} 
+      />
+      <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-2xl border-2 bg-slate-950 transition-all hover:scale-105 ${
         selected 
-          ? 'border-teal-400 shadow-[0_0_30px_rgba(45,212,191,0.6)] scale-110' 
-          : 'border-teal-400/30 shadow-[0_0_15px_rgba(45,212,191,0.1)]'
+          ? 'border-teal-400 shadow-[0_0_30px_rgba(45,212,191,0.6)] scale-105' 
+          : 'border-teal-400/30'
       }`}>
         <div className={`p-2 rounded-lg mb-1 transition-colors ${selected ? 'bg-teal-500 text-white' : 'bg-teal-500/10 text-teal-400'}`}>
           <Code2 size={16} />
@@ -70,7 +85,12 @@ const SkillNode = ({ data, selected }: any) => {
         <div className="text-[10px] font-serif font-bold text-white text-center px-2 truncate w-full">{data.name}</div>
         <div className="text-[8px] font-mono text-slate-400 text-center truncate w-full px-2 uppercase tracking-tighter">{data.category}</div>
       </div>
-      <Handle type="source" position={Position.Right} className="w-2 h-2 bg-teal-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
+      <Handle 
+        type="source" 
+        position={Position.Right} 
+        className="invisible group-hover:visible"
+        style={{ right: '0px', width: '8px', height: '8px', background: 'transparent' }} 
+      />
       
       <button 
         onClick={(e) => { e.stopPropagation(); data.onDelete(); }}
