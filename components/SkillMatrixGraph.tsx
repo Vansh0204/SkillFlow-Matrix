@@ -236,31 +236,40 @@ export default function SkillMatrixGraph() {
       return;
     }
 
-    const connectedNodeIds = new Set<string>();
-    connectedNodeIds.add(selectedId);
+    // We can't rely on 'edges' dependency directly as it triggers an infinite loop 
+    // when we update edge styles. Instead, we use the functional update to get 
+    // the latest state or just accept that highlights update on selection.
+    
+    setEdges(eds => {
+        const connectedNodeIds = new Set<string>();
+        connectedNodeIds.add(selectedId);
 
-    edges.forEach(e => {
-        const sId = typeof e.source === 'string' ? e.source : (e.source as any).id;
-        const tId = typeof e.target === 'string' ? e.target : (e.target as any).id;
-        if (sId === selectedId) connectedNodeIds.add(tId);
-        if (tId === selectedId) connectedNodeIds.add(sId);
+        // Find connected nodes from current edges
+        eds.forEach(e => {
+            const sId = typeof e.source === 'string' ? e.source : (e.source as any).id;
+            const tId = typeof e.target === 'string' ? e.target : (e.target as any).id;
+            if (sId === selectedId) connectedNodeIds.add(tId);
+            if (tId === selectedId) connectedNodeIds.add(sId);
+        });
+
+        // Update nodes opacity
+        setNodes(nds => nds.map(n => ({
+            ...n,
+            style: { ...n.style, opacity: connectedNodeIds.has(n.id) ? 1 : 0.15 }
+        })));
+
+        // Return updated edges
+        return eds.map(e => {
+            const sId = typeof e.source === 'string' ? e.source : (e.source as any).id;
+            const tId = typeof e.target === 'string' ? e.target : (e.target as any).id;
+            const isConnected = sId === selectedId || tId === selectedId;
+            return {
+                ...e,
+                style: { ...e.style, opacity: isConnected ? 1 : 0.1 }
+            };
+        });
     });
-
-    setNodes(nds => nds.map(n => ({
-        ...n,
-        style: { ...n.style, opacity: connectedNodeIds.has(n.id) ? 1 : 0.15 }
-    })));
-
-    setEdges(eds => eds.map(e => {
-        const sId = typeof e.source === 'string' ? e.source : (e.source as any).id;
-        const tId = typeof e.target === 'string' ? e.target : (e.target as any).id;
-        const isConnected = sId === selectedId || tId === selectedId;
-        return {
-            ...e,
-            style: { ...e.style, opacity: isConnected ? 1 : 0.1 }
-        };
-    }));
-  }, [selectedId, edges, setNodes, setEdges]);
+  }, [selectedId, setNodes, setEdges]);
 
   if (!fullData) return <div className="flex items-center justify-center h-screen bg-slate-950 text-white">Loading Matrix...</div>;
 
