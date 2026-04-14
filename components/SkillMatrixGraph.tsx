@@ -302,8 +302,16 @@ export default function SkillMatrixGraph() {
                 ...e,
                 style: { 
                     ...e.style, 
-                    opacity: isConnected ? 1 : 0.2,
+                    opacity: isConnected ? 1 : 0.15,
                     strokeWidth: isConnected ? 5 : 2
+                },
+                labelStyle: {
+                    ...e.labelStyle,
+                    opacity: isConnected ? 1 : 0.1
+                },
+                labelBgStyle: {
+                    ...e.labelBgStyle,
+                    fillOpacity: isConnected ? 0.8 : 0.05
                 },
                 animated: isConnected
             };
