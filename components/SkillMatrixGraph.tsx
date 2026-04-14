@@ -34,7 +34,7 @@ const PersonNode = ({ data, selected }: any) => {
       <Handle 
         type="target" 
         position={Position.Left} 
-        style={{ left: '-12px', width: '10px', height: '10px', background: 'transparent', border: 'none' }} 
+        style={{ left: '0px', width: '4px', height: '4px', background: 'transparent', border: 'none' }} 
       />
       <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-full border-2 bg-slate-950 transition-all hover:scale-105 ${
         selected 
@@ -50,7 +50,7 @@ const PersonNode = ({ data, selected }: any) => {
       <Handle 
         type="source" 
         position={Position.Right} 
-        style={{ right: '-12px', width: '10px', height: '10px', background: 'transparent', border: 'none' }} 
+        style={{ right: '0px', width: '4px', height: '4px', background: 'transparent', border: 'none' }} 
       />
       
       <button 
@@ -69,7 +69,7 @@ const SkillNode = ({ data, selected }: any) => {
       <Handle 
         type="target" 
         position={Position.Left} 
-        style={{ left: '-12px', width: '10px', height: '10px', background: 'transparent', border: 'none' }} 
+        style={{ left: '0px', width: '4px', height: '4px', background: 'transparent', border: 'none' }} 
       />
       <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-2xl border-2 bg-slate-950 transition-all hover:scale-105 ${
         selected 
@@ -85,7 +85,7 @@ const SkillNode = ({ data, selected }: any) => {
       <Handle 
         type="source" 
         position={Position.Right} 
-        style={{ right: '-12px', width: '10px', height: '10px', background: 'transparent', border: 'none' }} 
+        style={{ right: '0px', width: '4px', height: '4px', background: 'transparent', border: 'none' }} 
       />
       
       <button 
@@ -206,10 +206,10 @@ export default function SkillMatrixGraph() {
       labelStyle: { fill: '#fff', fontSize: 10, fontWeight: 700, fontFamily: 'var(--font-mono)' },
       style: { stroke: PROFICIENCY_COLORS[c.proficiency], strokeWidth: 3 },
       markerEnd: {
-        type: MarkerType.ArrowClosed,
+        type: MarkerType.Arrow,
         color: PROFICIENCY_COLORS[c.proficiency],
-        width: 25,
-        height: 25,
+        width: 12,
+        height: 12,
       },
       animated: true,
     }));
