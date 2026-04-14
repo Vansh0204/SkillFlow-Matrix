@@ -146,11 +146,11 @@ export default function DetailPanel({
               </div>
             ) : (
               <div className="group relative">
-                <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider mb-2 ${selectedType === 'person' ? 'bg-rose-500/10 text-rose-400' : 'bg-teal-500/10 text-teal-400'}`}>
+                <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-2 ${selectedType === 'person' ? 'bg-rose-500/10 text-rose-400' : 'bg-teal-500/10 text-teal-400'}`}>
                   {selectedType}
                 </span>
-                <h2 className="text-3xl font-bold text-white tracking-tight leading-tight">{selectedItem.name}</h2>
-                <p className="text-slate-400 text-lg">{selectedType === 'person' ? (selectedItem as Person).role : (selectedItem as Skill).category}</p>
+                <h2 className="text-3xl font-serif font-bold text-white tracking-tight leading-tight">{selectedItem.name}</h2>
+                <p className="text-slate-400 text-lg font-mono tracking-tighter">{selectedType === 'person' ? (selectedItem as Person).role : (selectedItem as Skill).category}</p>
                 
                 <button 
                   onClick={() => setIsEditing(true)}

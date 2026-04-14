@@ -15,6 +15,15 @@ body {
   overflow: hidden;
 }
 
+@layer base {
+  .font-serif {
+    font-family: var(--font-serif), serif;
+  }
+  .font-mono {
+    font-family: var(--font-mono), monospace;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

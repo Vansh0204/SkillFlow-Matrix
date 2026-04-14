@@ -40,8 +40,8 @@ const PersonNode = ({ data, selected }: any) => {
         <div className={`p-2 rounded-full mb-1 transition-colors ${selected ? 'bg-rose-500 text-white' : 'bg-rose-500/10 text-rose-400'}`}>
           <Users size={16} />
         </div>
-        <div className="text-[10px] font-bold text-white text-center px-2 truncate w-full">{data.name}</div>
-        <div className="text-[8px] text-slate-400 text-center truncate w-full px-2">{data.role}</div>
+        <div className="text-[10px] font-serif font-bold text-white text-center px-2 truncate w-full">{data.name}</div>
+        <div className="text-[8px] font-mono text-slate-400 text-center truncate w-full px-2 uppercase tracking-tighter">{data.role}</div>
       </div>
       <Handle type="source" position={Position.Right} className="w-2 h-2 bg-rose-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
       
@@ -67,8 +67,8 @@ const SkillNode = ({ data, selected }: any) => {
         <div className={`p-2 rounded-lg mb-1 transition-colors ${selected ? 'bg-teal-500 text-white' : 'bg-teal-500/10 text-teal-400'}`}>
           <Code2 size={16} />
         </div>
-        <div className="text-[10px] font-bold text-white text-center px-2 truncate w-full">{data.name}</div>
-        <div className="text-[8px] text-slate-400 text-center truncate w-full px-2">{data.category}</div>
+        <div className="text-[10px] font-serif font-bold text-white text-center px-2 truncate w-full">{data.name}</div>
+        <div className="text-[8px] font-mono text-slate-400 text-center truncate w-full px-2 uppercase tracking-tighter">{data.category}</div>
       </div>
       <Handle type="source" position={Position.Right} className="w-2 h-2 bg-teal-400 border-none opacity-0 group-hover:opacity-100 transition-opacity" />
       
@@ -187,7 +187,7 @@ export default function SkillMatrixGraph() {
       labelBgPadding: [4, 2],
       labelBgBorderRadius: 4,
       labelBgStyle: { fill: '#1e293b', color: '#fff', fillOpacity: 0.8 },
-      labelStyle: { fill: '#fff', fontSize: 10, fontWeight: 700 },
+      labelStyle: { fill: '#fff', fontSize: 10, fontWeight: 700, fontFamily: 'var(--font-mono)' },
       style: { stroke: PROFICIENCY_COLORS[c.proficiency], strokeWidth: 3 },
       markerEnd: {
         type: MarkerType.ArrowClosed,
@@ -281,10 +281,10 @@ export default function SkillMatrixGraph() {
             <Layers className="text-rose-400 w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-rose-100 to-teal-100 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-serif font-bold tracking-tight bg-gradient-to-r from-white via-rose-100 to-teal-100 bg-clip-text text-transparent">
               SkillFlow Matrix
             </h1>
-            <p className="text-xs text-slate-500 font-medium tracking-widest uppercase">Deep Quartz Capability Graph</p>
+            <p className="text-[10px] font-mono text-slate-500 font-medium tracking-[0.2em] uppercase">Deep Quartz Capability Graph</p>
           </div>
         </div>
       </header>

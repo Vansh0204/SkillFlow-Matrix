@@ -105,7 +105,7 @@ export default function CRUDPanel({ data, onUpdate }: CRUDPanelProps) {
         >
           <div className="flex items-center gap-3">
             <UserPlus size={18} className="text-rose-400" />
-            <span className="text-sm font-bold text-slate-200">Add Team Member</span>
+            <span className="text-sm font-serif font-bold text-slate-200">Add Team Member</span>
           </div>
           {openSection === 'person' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </button>
@@ -113,26 +113,26 @@ export default function CRUDPanel({ data, onUpdate }: CRUDPanelProps) {
         {openSection === 'person' && (
           <form onSubmit={handleAddPerson} className="p-4 pt-0 space-y-4 animate-in slide-in-from-top duration-300">
             <div className="space-y-1">
-              <label className="text-[10px] font-bold uppercase text-slate-500">Name</label>
+              <label className="text-[10px] font-mono font-bold uppercase text-slate-500">Name</label>
               <input 
                 type="text" 
                 value={personName}
                 onChange={(e) => setPersonName(e.target.value)}
                 placeholder="e.g. Satoshi Nakamoto"
-                className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-rose-500"
+                className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-rose-500 font-serif"
               />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-bold uppercase text-slate-500">Role</label>
+              <label className="text-[10px] font-mono font-bold uppercase text-slate-500">Role</label>
               <input 
                 type="text" 
                 value={personRole}
                 onChange={(e) => setPersonRole(e.target.value)}
                 placeholder="e.g. Lead Developer"
-                className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-rose-500"
+                className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-rose-500 font-mono tracking-tighter"
               />
             </div>
-            <button className="w-full py-2 bg-rose-500 hover:bg-rose-400 text-white rounded-lg text-xs font-bold transition-all shadow-lg shadow-rose-500/20">
+            <button className="w-full py-2 bg-rose-500 hover:bg-rose-400 text-white rounded-lg text-xs font-mono font-bold transition-all shadow-lg shadow-rose-500/20 uppercase tracking-widest">
               Create Member
             </button>
           </form>

@@ -62,7 +62,7 @@ export default function SummaryPanel({ data }: SummaryPanelProps) {
         className="w-full h-12 flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-colors"
       >
         <BarChart3 size={16} className="text-rose-400" />
-        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-300">Network Analytics</span>
+        <span className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-slate-300">Network Analytics</span>
         {isOpen ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
       </button>
 
@@ -114,8 +114,8 @@ export default function SummaryPanel({ data }: SummaryPanelProps) {
           <div className="space-y-2">
             {stats.sortedPeople.map((p, i) => (
               <div key={i} className="flex items-center justify-between text-sm group">
-                <span className="text-slate-200 font-medium truncate max-w-[120px] group-hover:text-teal-400 transition-colors">{p.name}</span>
-                <span className="px-2 py-0.5 rounded-full bg-white/5 text-[10px] font-bold text-slate-400 border border-white/5">{p.count} skills</span>
+                <span className="text-slate-200 font-serif font-bold truncate max-w-[120px] group-hover:text-teal-400 transition-colors">{p.name}</span>
+                <span className="px-2 py-0.5 rounded-full bg-white/5 text-[10px] font-mono font-bold text-slate-400 border border-white/5">{p.count} skills</span>
               </div>
             ))}
           </div>
