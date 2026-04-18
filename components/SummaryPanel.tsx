@@ -52,8 +52,8 @@ export default function SummaryPanel({ data }: SummaryPanelProps) {
 
   return (
     <div 
-      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-[800px] max-w-[95vw] bg-slate-950/60 border-t border-x border-white/5 rounded-t-[2.5rem] shadow-[0_-10px_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl transition-all duration-500 z-40 ${
-        isOpen ? 'h-64 translate-y-0' : 'h-12 translate-y-0'
+      className={`fixed bottom-0 left-0 lg:left-1/2 lg:-translate-x-1/2 w-full lg:w-[800px] bg-slate-950/80 border-t border-white/5 lg:rounded-t-[2.5rem] shadow-[0_-10px_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl transition-all duration-500 z-40 ${
+        isOpen ? 'h-72 sm:h-64' : 'h-12'
       }`}
     >
       {/* Toggle Bar */}
@@ -67,7 +67,7 @@ export default function SummaryPanel({ data }: SummaryPanelProps) {
       </button>
 
       {/* Analytics Content */}
-      <div className={`p-8 grid grid-cols-3 gap-8 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      <div className={`p-6 sm:p-8 h-[calc(100%-48px)] overflow-y-auto lg:overflow-visible grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         
         {/* Most Common Skills */}
         <div className="space-y-4">

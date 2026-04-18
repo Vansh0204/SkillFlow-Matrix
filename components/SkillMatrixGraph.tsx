@@ -44,8 +44,8 @@ const PersonNode = ({ data, selected }: any) => {
         <div className={`p-2 rounded-full mb-1 transition-colors ${selected ? 'bg-rose-500 text-white' : 'bg-rose-500/10 text-rose-400'}`}>
           <Users size={16} />
         </div>
-        <div className="text-[10px] font-serif font-bold text-white text-center px-2 truncate w-full">{data.name}</div>
-        <div className="text-[8px] font-mono text-slate-400 text-center truncate w-full px-2 uppercase tracking-tighter">{data.role}</div>
+        <div className="text-xs sm:text-sm font-serif font-bold text-white text-center px-1 truncate w-full leading-tight">{data.name}</div>
+        <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 text-center truncate w-full px-1 uppercase tracking-tighter mt-0.5">{data.role}</div>
       </div>
       <Handle 
         type="source" 
@@ -79,8 +79,8 @@ const SkillNode = ({ data, selected }: any) => {
         <div className={`p-2 rounded-lg mb-1 transition-colors ${selected ? 'bg-teal-500 text-white' : 'bg-teal-500/10 text-teal-400'}`}>
           <Code2 size={16} />
         </div>
-        <div className="text-[10px] font-serif font-bold text-white text-center px-2 truncate w-full">{data.name}</div>
-        <div className="text-[8px] font-mono text-slate-400 text-center truncate w-full px-2 uppercase tracking-tighter">{data.category}</div>
+        <div className="text-xs sm:text-sm font-serif font-bold text-white text-center px-1 truncate w-full leading-tight">{data.name}</div>
+        <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 text-center truncate w-full px-1 uppercase tracking-tighter mt-0.5">{data.category}</div>
       </div>
       <Handle 
         type="source" 
@@ -117,6 +117,8 @@ export default function SkillMatrixGraph() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState<'person' | 'skill' | null>(null);
 
+  const [isCRUDOpen, setIsCRUDOpen] = useState(false);
+
   const onConnect = useCallback(
     (params: FlowConnection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
@@ -125,7 +127,13 @@ export default function SkillMatrixGraph() {
   const getLayoutedElements = useCallback((nodes: Node[], edges: Edge[]) => {
     const dagreGraph = new dagre.graphlib.Graph();
     dagreGraph.setDefaultEdgeLabel(() => ({}));
-    dagreGraph.setGraph({ rankdir: 'LR' });
+    dagreGraph.setGraph({ 
+      rankdir: 'LR',
+      nodesep: 80,
+      ranksep: 200,
+      marginx: 50,
+      marginy: 50
+    });
 
     nodes.forEach((node) => {
       dagreGraph.setNode(node.id, { width: 150, height: 150 });
@@ -200,10 +208,10 @@ export default function SkillMatrixGraph() {
       source: c.personId,
       target: c.skillId,
       label: c.proficiency,
-      labelBgPadding: [4, 2],
-      labelBgBorderRadius: 4,
-      labelBgStyle: { fill: '#1e293b', color: '#fff', fillOpacity: 0.8 },
-      labelStyle: { fill: '#fff', fontSize: 10, fontWeight: 700, fontFamily: 'var(--font-mono)' },
+      labelBgPadding: [6, 4],
+      labelBgBorderRadius: 6,
+      labelBgStyle: { fill: '#1e293b', color: '#fff', fillOpacity: 0.9 },
+      labelStyle: { fill: '#fff', fontSize: 11, fontWeight: 800, fontFamily: 'var(--font-mono)', textTransform: 'uppercase' },
       style: { stroke: PROFICIENCY_COLORS[c.proficiency], strokeWidth: 3 },
       markerEnd: {
         type: MarkerType.Arrow,
@@ -323,22 +331,41 @@ export default function SkillMatrixGraph() {
 
   return (
     <div className="flex flex-col h-screen bg-[#0a0614] text-slate-100 font-sans overflow-hidden">
-      <header className="flex items-center justify-between px-8 py-6 bg-slate-900/30 border-b border-white/5 backdrop-blur-md z-10">
+      <header className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between px-4 sm:px-8 py-4 sm:py-6 bg-slate-900/30 border-b border-white/5 backdrop-blur-md z-50 gap-4 sm:gap-0">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-rose-500/10 rounded-xl border border-rose-500/20">
-            <Layers className="text-rose-400 w-6 h-6" />
+          <div className="p-1.5 sm:p-2 bg-rose-500/10 rounded-lg sm:xl border border-rose-500/20">
+            <Layers className="text-rose-400 w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
-            <h1 className="text-2xl font-serif font-bold tracking-tight bg-gradient-to-r from-white via-rose-100 to-teal-100 bg-clip-text text-transparent">
+            <h1 className="text-lg sm:text-2xl font-serif font-bold tracking-tight bg-gradient-to-r from-white via-rose-100 to-teal-100 bg-clip-text text-transparent leading-none">
               SkillFlow Matrix
             </h1>
-            <p className="text-[10px] font-mono text-slate-500 font-medium tracking-[0.2em] uppercase">Deep Quartz Capability Graph</p>
+            <p className="text-[8px] sm:text-[10px] font-mono text-slate-500 font-medium tracking-[0.2em] uppercase mt-1">Deep Quartz Capability Graph</p>
           </div>
         </div>
+        
+        <button 
+          onClick={() => setIsCRUDOpen(!isCRUDOpen)}
+          className={`lg:hidden px-4 py-2 rounded-xl border font-bold text-xs uppercase tracking-widest transition-all ${
+            isCRUDOpen 
+              ? 'bg-rose-500 border-rose-400 text-white shadow-lg shadow-rose-500/20' 
+              : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
+          }`}
+        >
+          {isCRUDOpen ? 'Close Editor' : 'Edit Matrix'}
+        </button>
       </header>
 
       <main className="relative flex-1 flex overflow-hidden">
-        <CRUDPanel data={fullData} onUpdate={handleUpdate} />
+        {/* CRUD Panel Drawer for Mobile */}
+        <div className={`
+          fixed lg:absolute left-0 top-[120px] sm:top-24 bottom-0 lg:bottom-auto w-full lg:w-80 
+          bg-slate-950 lg:bg-transparent z-[60] lg:z-40 transition-transform duration-500 
+          p-4 lg:p-0 border-r border-white/10 lg:border-none
+          ${isCRUDOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        `}>
+          <CRUDPanel data={fullData} onUpdate={handleUpdate} />
+        </div>
 
         <div className="flex-1 relative bg-[#0a0614]">
           <ReactFlow
@@ -355,18 +382,37 @@ export default function SkillMatrixGraph() {
             }}
             nodeTypes={nodeTypes}
             fitView
+            fitViewOptions={{ padding: 0.2, duration: 1000, minZoom: 0.7 }}
             snapToGrid
             snapGrid={[15, 15]}
             colorMode="dark"
-            minZoom={0.05}
+            minZoom={0.1}
             maxZoom={2}
+            defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+            panOnScroll
+            selectionOnDrag
           >
-            <Background color="#ffffff" gap={20} size={1.2} variant={"dots" as any} style={{ opacity: 0.3 }} />
-            <Controls />
+            <Background 
+              color="#fb7185" 
+              gap={24} 
+              size={1} 
+              variant={"dots" as any} 
+              style={{ opacity: 0.15 }} 
+            />
+            <Controls 
+              position="bottom-left"
+              className="bg-slate-900 border-white/5 shadow-2xl rounded-xl overflow-hidden mb-8 ml-8"
+            />
             <MiniMap 
               nodeColor={(node) => node.type === 'person' ? '#fb7185' : '#2dd4bf'}
               maskColor="rgba(10, 6, 20, 0.7)"
-              style={{ backgroundColor: '#0a0614', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}
+              style={{ 
+                backgroundColor: '#0a0614', 
+                borderRadius: '16px', 
+                border: '1px solid rgba(255,255,255,0.05)',
+                bottom: 20,
+                right: 20
+              }}
             />
             <Panel position="bottom-left" className="bg-slate-900/40 p-4 rounded-2xl border border-white/5 backdrop-blur-xl shadow-2xl mb-8 ml-8">
               <div className="flex gap-4">

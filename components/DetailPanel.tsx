@@ -85,7 +85,7 @@ export default function DetailPanel({
 
   return (
     <div 
-      className={`fixed inset-y-0 right-0 w-96 bg-slate-950/60 border-l border-white/5 shadow-2xl backdrop-blur-2xl transform transition-transform duration-500 ease-in-out z-50 ${
+      className={`fixed inset-y-0 right-0 w-full sm:w-96 bg-slate-950 lg:bg-slate-950/60 border-l border-white/5 shadow-2xl backdrop-blur-2xl transform transition-transform duration-500 ease-in-out z-50 ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
