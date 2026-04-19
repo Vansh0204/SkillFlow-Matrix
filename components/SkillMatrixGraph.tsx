@@ -275,7 +275,13 @@ export default function SkillMatrixGraph() {
   useEffect(() => {
     if (!selectedId) {
       setNodes(nds => nds.map(n => ({ ...n, style: { ...n.style, opacity: 1 } })));
-      setEdges(eds => eds.map(e => ({ ...e, style: { ...e.style, opacity: 1 } })));
+      setEdges(eds => eds.map(e => ({ 
+        ...e, 
+        style: { ...e.style, opacity: 1, strokeWidth: 3 },
+        labelStyle: { ...e.labelStyle, opacity: 1 },
+        labelBgStyle: { ...e.labelBgStyle, fillOpacity: 0.9 },
+        animated: true 
+      })));
       return;
     }
 
