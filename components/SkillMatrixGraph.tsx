@@ -368,7 +368,6 @@ export default function SkillMatrixGraph() {
           fixed lg:absolute left-0 top-[120px] sm:top-24 bottom-0 lg:bottom-auto w-full lg:w-80 
           bg-slate-950 lg:bg-transparent z-[70] transition-transform duration-500 
           p-4 lg:p-6 border-r border-white/10 lg:border-none
-          overflow-y-auto max-h-[calc(100vh-100px)] pb-32
           ${isCRUDOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}>
           <CRUDPanel data={fullData} onUpdate={handleUpdate} />

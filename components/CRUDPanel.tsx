@@ -105,7 +105,8 @@ export default function CRUDPanel({ data, onUpdate }: CRUDPanelProps) {
   };
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-4 max-h-[calc(100vh-180px)] overflow-y-auto pb-48 px-1">
+
       {/* Mobile Action Dropdown */}
       <div className="lg:hidden relative">
         <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
