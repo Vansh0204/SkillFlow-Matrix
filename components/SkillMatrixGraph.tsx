@@ -407,7 +407,7 @@ export default function SkillMatrixGraph() {
             />
             <Controls 
               position="bottom-left"
-              className="bg-slate-900 border-white/5 shadow-2xl rounded-xl overflow-hidden mb-8 ml-8"
+              className="bg-slate-900 border-white/5 shadow-2xl rounded-xl overflow-hidden mb-32 ml-4 sm:ml-8"
             />
             <MiniMap 
               nodeColor={(node) => node.type === 'person' ? '#fb7185' : '#2dd4bf'}
@@ -416,16 +416,19 @@ export default function SkillMatrixGraph() {
                 backgroundColor: '#0a0614', 
                 borderRadius: '16px', 
                 border: '1px solid rgba(255,255,255,0.05)',
-                bottom: 20,
-                right: 20
+                top: 100,
+                right: 20,
+                height: 100,
+                width: 150
               }}
+              className="hidden lg:block"
             />
-            <Panel position="bottom-left" className="bg-slate-900/40 p-4 rounded-2xl border border-white/5 backdrop-blur-xl shadow-2xl mb-8 ml-8">
-              <div className="flex gap-4">
+            <Panel position="bottom-right" className="bg-slate-900/40 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-white/5 backdrop-blur-xl shadow-2xl mb-32 mr-4 sm:mr-8 max-w-[120px] sm:max-w-none">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
                 {Object.entries(PROFICIENCY_COLORS).map(([level, color]) => (
                   <div key={level} className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{level}</span>
+                    <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: color }} />
+                    <span className="text-[8px] sm:text-[10px] font-bold uppercase tracking-wider text-slate-400">{level}</span>
                   </div>
                 ))}
               </div>
