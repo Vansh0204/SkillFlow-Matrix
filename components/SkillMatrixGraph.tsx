@@ -388,13 +388,13 @@ export default function SkillMatrixGraph() {
             }}
             nodeTypes={nodeTypes}
             fitView
-            fitViewOptions={{ padding: 0.1, duration: 800, minZoom: 1.1 }}
+            fitViewOptions={{ padding: 0.2, duration: 800, minZoom: 0.6 }}
             snapToGrid
             snapGrid={[15, 15]}
             colorMode="dark"
             minZoom={0.1}
             maxZoom={4}
-            defaultViewport={{ x: 0, y: 0, zoom: 1.1 }}
+            defaultViewport={{ x: 0, y: 0, zoom: 0.6 }}
             panOnScroll
             selectionOnDrag
           >
