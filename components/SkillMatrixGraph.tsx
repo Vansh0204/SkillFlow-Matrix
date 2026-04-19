@@ -407,23 +407,23 @@ export default function SkillMatrixGraph() {
             />
             <Controls 
               position="bottom-left"
-              className="bg-slate-900 border-white/5 shadow-2xl rounded-xl overflow-hidden mb-32 ml-4 sm:ml-8"
+              className="bg-slate-900 border-white/5 shadow-2xl rounded-xl overflow-hidden mb-24 ml-4 sm:ml-8 z-[100]"
             />
             <MiniMap 
               nodeColor={(node) => node.type === 'person' ? '#fb7185' : '#2dd4bf'}
               maskColor="rgba(10, 6, 20, 0.7)"
               style={{ 
                 backgroundColor: '#0a0614', 
-                borderRadius: '16px', 
+                borderRadius: '12px', 
                 border: '1px solid rgba(255,255,255,0.05)',
-                top: 100,
-                right: 20,
-                height: 100,
-                width: 150
+                top: 10,
+                right: 10,
+                height: 80,
+                width: 120,
               }}
-              className="hidden lg:block"
+              className="z-[100]"
             />
-            <Panel position="bottom-right" className="bg-slate-900/40 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-white/5 backdrop-blur-xl shadow-2xl mb-32 mr-4 sm:mr-8 max-w-[120px] sm:max-w-none">
+            <Panel position="bottom-right" className="bg-slate-900/40 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-white/5 backdrop-blur-xl shadow-2xl mb-24 mr-4 sm:mr-8 max-w-[120px] sm:max-w-none z-[100]">
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
                 {Object.entries(PROFICIENCY_COLORS).map(([level, color]) => (
                   <div key={level} className="flex items-center gap-2">
