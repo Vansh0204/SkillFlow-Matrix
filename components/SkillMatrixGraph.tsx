@@ -36,16 +36,16 @@ const PersonNode = ({ data, selected }: any) => {
         position={Position.Left} 
         style={{ left: '0px', width: '4px', height: '4px', background: 'transparent', border: 'none' }} 
       />
-      <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-full border-2 bg-slate-950 transition-all hover:scale-105 ${
+      <div className={`flex flex-col items-center justify-center w-28 h-28 rounded-full border-2 bg-slate-950 transition-all hover:scale-105 ${
         selected 
           ? 'border-rose-400 shadow-[0_0_30px_rgba(251,113,133,0.6)] scale-105' 
           : 'border-rose-400/30'
       }`}>
         <div className={`p-2 rounded-full mb-1 transition-colors ${selected ? 'bg-rose-500 text-white' : 'bg-rose-500/10 text-rose-400'}`}>
-          <Users size={16} />
+          <Users size={18} />
         </div>
-        <div className="text-xs sm:text-sm font-serif font-bold text-white text-center px-1 truncate w-full leading-tight">{data.name}</div>
-        <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 text-center truncate w-full px-1 uppercase tracking-tighter mt-0.5">{data.role}</div>
+        <div className="text-xs font-serif font-bold text-white text-center px-3 truncate w-full leading-tight">{data.name}</div>
+        <div className="text-[9px] font-mono text-slate-400 text-center truncate w-full px-4 uppercase tracking-tighter mt-1">{data.role}</div>
       </div>
       <Handle 
         type="source" 
@@ -71,16 +71,16 @@ const SkillNode = ({ data, selected }: any) => {
         position={Position.Left} 
         style={{ left: '0px', width: '4px', height: '4px', background: 'transparent', border: 'none' }} 
       />
-      <div className={`flex flex-col items-center justify-center w-24 h-24 rounded-2xl border-2 bg-slate-950 transition-all hover:scale-105 ${
+      <div className={`flex flex-col items-center justify-center w-28 h-28 rounded-2xl border-2 bg-slate-950 transition-all hover:scale-105 ${
         selected 
           ? 'border-teal-400 shadow-[0_0_30px_rgba(45,212,191,0.6)] scale-105' 
           : 'border-teal-400/30'
       }`}>
         <div className={`p-2 rounded-lg mb-1 transition-colors ${selected ? 'bg-teal-500 text-white' : 'bg-teal-500/10 text-teal-400'}`}>
-          <Code2 size={16} />
+          <Code2 size={18} />
         </div>
-        <div className="text-xs sm:text-sm font-serif font-bold text-white text-center px-1 truncate w-full leading-tight">{data.name}</div>
-        <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 text-center truncate w-full px-1 uppercase tracking-tighter mt-0.5">{data.category}</div>
+        <div className="text-xs font-serif font-bold text-white text-center px-3 truncate w-full leading-tight">{data.name}</div>
+        <div className="text-[9px] font-mono text-slate-400 text-center truncate w-full px-4 uppercase tracking-tighter mt-1">{data.category}</div>
       </div>
       <Handle 
         type="source" 
@@ -136,7 +136,7 @@ export default function SkillMatrixGraph() {
     });
 
     nodes.forEach((node) => {
-      dagreGraph.setNode(node.id, { width: 150, height: 150 });
+      dagreGraph.setNode(node.id, { width: 180, height: 180 });
     });
 
     edges.forEach((edge) => {
