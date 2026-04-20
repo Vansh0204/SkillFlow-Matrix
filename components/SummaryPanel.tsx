@@ -1,16 +1,15 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { GraphData } from '@/lib/types';
-import { BarChart3, ChevronUp, ChevronDown, AlertTriangle, Star, Trophy } from 'lucide-react';
+import { BarChart3, Users, Zap, Link, Trophy, Medal, AlertTriangle } from 'lucide-react';
 
 interface SummaryPanelProps {
   data: GraphData;
+  isDarkMode?: boolean;
 }
 
-export default function SummaryPanel({ data }: SummaryPanelProps) {
-  const [isOpen, setIsOpen] = useState(false);
-
+export default function SummaryPanel({ data, isDarkMode = true }: SummaryPanelProps) {
   // Memoized Statistics
   const stats = useMemo(() => {
     // 1. Most common skills
@@ -19,13 +18,13 @@ export default function SummaryPanel({ data }: SummaryPanelProps) {
       skillCounts[c.skillId] = (skillCounts[c.skillId] || 0) + 1;
     });
 
-    const sortedSkills = Object.entries(skillCounts)
+    const mostCommonSkill = Object.entries(skillCounts)
       .sort(([, a], [, b]) => b - a)
-      .slice(0, 3)
+      .slice(0, 1)
       .map(([id, count]) => ({
         name: data.skills.find(s => s.id === id)?.name || 'Unknown',
         count
-      }));
+      }))[0];
 
     // 2. Skill gaps (Only 1 person knows)
     const skillGaps = data.skills.filter(s => {
@@ -39,89 +38,100 @@ export default function SummaryPanel({ data }: SummaryPanelProps) {
       personCounts[c.personId] = (personCounts[c.personId] || 0) + 1;
     });
 
-    const sortedPeople = Object.entries(personCounts)
+    const mostSkilled = Object.entries(personCounts)
       .sort(([, a], [, b]) => b - a)
-      .slice(0, 3)
+      .slice(0, 1)
       .map(([id, count]) => ({
         name: data.people.find(p => p.id === id)?.name || 'Unknown',
         count
-      }));
+      }))[0];
 
-    return { sortedSkills, skillGaps, sortedPeople };
+    return { mostCommonSkill, skillGaps, mostSkilled };
   }, [data]);
 
   return (
-    <div 
-      className={`fixed bottom-0 left-0 lg:left-1/2 lg:-translate-x-1/2 w-full lg:w-[800px] bg-slate-950/80 border-t border-white/5 lg:rounded-t-[2.5rem] shadow-[0_-10px_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl transition-all duration-500 z-40 ${
-        isOpen ? 'h-72 sm:h-64' : 'h-12'
-      }`}
-    >
-      {/* Toggle Bar */}
-      <button 
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full h-12 flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-colors"
-      >
-        <BarChart3 size={16} className="text-rose-400" />
-        <span className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-slate-300">Network Analytics</span>
-        {isOpen ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
-      </button>
+    <div className="flex flex-col h-full overflow-y-auto p-6 space-y-8">
+      {/* Header */}
+      <div className={`flex items-center gap-3 border-b ${isDarkMode ? 'border-white/10' : 'border-slate-200'} pb-4`}>
+        <BarChart3 size={20} className={isDarkMode ? 'text-slate-300' : 'text-slate-500'} />
+        <h2 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Team Summary</h2>
+      </div>
 
-      {/* Analytics Content */}
-      <div className={`p-6 sm:p-8 h-[calc(100%-48px)] overflow-y-auto lg:overflow-visible grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        
-        {/* Most Common Skills */}
-        <div className="space-y-4">
-          <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-            <Trophy size={14} className="text-orange-400" />
-            Top Capabilities
-          </h4>
-          <div className="space-y-2">
-            {stats.sortedSkills.map((s, i) => (
-              <div key={i} className="flex items-center justify-between text-sm group">
-                <span className="text-slate-200 font-medium truncate max-w-[120px] group-hover:text-rose-400 transition-colors">{s.name}</span>
-                <span className="px-2 py-0.5 rounded-full bg-white/5 text-[10px] font-bold text-slate-400 border border-white/5">{s.count} masters</span>
-              </div>
-            ))}
+      {/* Metrics Boxes */}
+      <div className="space-y-3">
+        <div className={`flex justify-between items-center ${isDarkMode ? 'bg-[#121422] border-white/5' : 'bg-slate-50 border-slate-200 shadow-sm'} p-4 rounded-xl border`}>
+          <div className="flex items-center gap-2 text-slate-300">
+            <Users size={16} className={isDarkMode ? 'text-indigo-400' : 'text-indigo-600'} />
+            <span className={`text-sm font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>Team size</span>
           </div>
+          <span className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{data.people.length}</span>
         </div>
+        
+        <div className={`flex justify-between items-center ${isDarkMode ? 'bg-[#121422] border-white/5' : 'bg-slate-50 border-slate-200 shadow-sm'} p-4 rounded-xl border`}>
+          <div className="flex items-center gap-2 text-slate-300">
+            <Zap size={16} className="text-orange-400" />
+            <span className={`text-sm font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>Skills tracked</span>
+          </div>
+          <span className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{data.skills.length}</span>
+        </div>
+
+        <div className={`flex justify-between items-center ${isDarkMode ? 'bg-[#121422] border-white/5' : 'bg-slate-50 border-slate-200 shadow-sm'} p-4 rounded-xl border`}>
+          <div className="flex items-center gap-2 text-slate-300">
+            <Link size={16} className="text-slate-400" />
+            <span className={`text-sm font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>Connections</span>
+          </div>
+          <span className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{data.connections.length}</span>
+        </div>
+      </div>
+
+      {/* Highlights */}
+      <div className="space-y-6 pt-4">
+        {/* Most Common Skill */}
+        {stats.mostCommonSkill && (
+          <div className="space-y-2">
+            <h4 className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              <Trophy size={14} className="text-orange-400" />
+              Most Common Skill
+            </h4>
+            <div className={`flex justify-between items-center ${isDarkMode ? 'bg-[#121422] border-white/5' : 'bg-slate-50 border-slate-200 shadow-sm'} p-4 rounded-xl border`}>
+              <span className={isDarkMode ? 'text-white font-bold' : 'text-slate-900 font-bold'}>{stats.mostCommonSkill.name}</span>
+              <span className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{stats.mostCommonSkill.count} people</span>
+            </div>
+          </div>
+        )}
+
+        {/* Most Skilled */}
+        {stats.mostSkilled && (
+          <div className="space-y-2">
+            <h4 className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              <Medal size={14} className="text-pink-400" />
+              Most Skilled
+            </h4>
+            <div className={`flex justify-between items-center ${isDarkMode ? 'bg-[#121422] border-white/5' : 'bg-slate-50 border-slate-200 shadow-sm'} p-4 rounded-xl border`}>
+              <span className={isDarkMode ? 'text-white font-bold' : 'text-slate-900 font-bold'}>{stats.mostSkilled.name}</span>
+              <span className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{stats.mostSkilled.count} skills</span>
+            </div>
+          </div>
+        )}
 
         {/* Skill Gaps */}
-        <div className="space-y-4 border-x border-white/5 px-8">
-          <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-            <AlertTriangle size={14} className="text-rose-400" />
-            Vulnerability Index
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {stats.skillGaps.length > 0 ? (
-              stats.skillGaps.slice(0, 6).map((s, i) => (
-                <span key={i} className="px-2 py-1 rounded-lg bg-rose-500/10 border border-rose-500/20 text-[10px] text-rose-100 font-medium lowercase">
-                  #{s.replace(/\s+/g, '-')}
-                </span>
-              ))
-            ) : (
-                <span className="text-xs text-slate-600 italic">No critical risks found</span>
-            )}
-            {stats.skillGaps.length > 6 && <span className="text-[10px] text-slate-500 pt-1">+{stats.skillGaps.length - 6} more</span>}
-          </div>
-        </div>
-
-        {/* Broadest SkillSets */}
-        <div className="space-y-4">
-          <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-            <Star size={14} className="text-teal-400" />
-            Polymaths
-          </h4>
+        {stats.skillGaps.length > 0 && (
           <div className="space-y-2">
-            {stats.sortedPeople.map((p, i) => (
-              <div key={i} className="flex items-center justify-between text-sm group">
-                <span className="text-slate-200 font-serif font-bold truncate max-w-[120px] group-hover:text-teal-400 transition-colors">{p.name}</span>
-                <span className="px-2 py-0.5 rounded-full bg-white/5 text-[10px] font-mono font-bold text-slate-400 border border-white/5">{p.count} skills</span>
-              </div>
-            ))}
+            <h4 className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              <AlertTriangle size={14} className="text-orange-400" />
+              Skill Gaps ({stats.skillGaps.length} Person)
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {stats.skillGaps.map((s, i) => (
+                <span key={i} className={`px-3 py-1.5 rounded-md ${isDarkMode ? 'bg-yellow-400/20 text-yellow-200' : 'bg-yellow-100 text-yellow-800'} text-xs font-semibold`}>
+                  {s}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-
+        )}
       </div>
+
     </div>
   );
 }

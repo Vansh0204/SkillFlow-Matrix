@@ -14,9 +14,9 @@ interface DetailPanelProps {
 }
 
 const PROFICIENCY_COLORS: Record<string, { bg: string; text: string; label: string }> = {
-  learning: { bg: 'bg-orange-400/10', text: 'text-orange-400', label: 'Learning' },
-  familiar: { bg: 'bg-purple-400/10', text: 'text-purple-400', label: 'Familiar' },
-  expert: { bg: 'bg-teal-400/10', text: 'text-teal-400', label: 'Expert' },
+  learning: { bg: 'bg-yellow-500/10', text: 'text-yellow-500', label: 'Learning' },
+  familiar: { bg: 'bg-blue-500/10', text: 'text-blue-500', label: 'Familiar' },
+  expert: { bg: 'bg-green-500/10', text: 'text-green-500', label: 'Expert' },
 };
 
 export default function DetailPanel({
@@ -26,6 +26,7 @@ export default function DetailPanel({
   selectedType,
   data,
   onUpdate,
+  isDarkMode = true,
 }: DetailPanelProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState('');
@@ -85,19 +86,19 @@ export default function DetailPanel({
 
   return (
     <div 
-      className={`fixed inset-y-0 right-0 w-full sm:w-96 bg-slate-950 lg:bg-slate-950/60 border-l border-white/5 shadow-2xl backdrop-blur-2xl transform transition-transform duration-500 ease-in-out z-50 ${
+      className={`fixed inset-y-0 right-0 w-full sm:w-[320px] ${isDarkMode ? 'bg-[#1e2238] border-white/5 shadow-2xl' : 'bg-white border-slate-200 shadow-xl'} border-l transform transition-transform duration-500 ease-in-out z-[80] ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
       <div className="h-full flex flex-col p-8 overflow-y-auto scrollbar-hide">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <div className={`p-3 rounded-2xl ${selectedType === 'person' ? 'bg-rose-500/10 text-rose-400' : 'bg-teal-500/10 text-teal-400'}`}>
+          <div className={`p-3 rounded-2xl ${selectedType === 'person' ? 'bg-indigo-500/10 text-indigo-400' : 'bg-purple-500/10 text-purple-400'}`}>
             {selectedType === 'person' ? <User size={24} /> : <Code2 size={24} />}
           </div>
           <button 
             onClick={onClose}
-            className="p-2 hover:bg-slate-800 rounded-full text-slate-400 hover:text-white transition-all"
+            className={`p-2 ${isDarkMode ? 'hover:bg-slate-800 text-slate-400 hover:text-white' : 'hover:bg-slate-100 text-slate-500 hover:text-slate-900'} rounded-full transition-all`}
           >
             <X size={20} />
           </button>
@@ -114,7 +115,7 @@ export default function DetailPanel({
                     type="text" 
                     value={editName}
                     onChange={(e) => setEditName(e.target.value)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-semibold"
+                    className={`w-full ${isDarkMode ? 'bg-[#121422] border-white/10 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'} rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-semibold`}
                   />
                 </div>
                 <div className="space-y-1">
@@ -125,20 +126,20 @@ export default function DetailPanel({
                     type="text" 
                     value={editInfo}
                     onChange={(e) => setEditInfo(e.target.value)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm"
+                    className={`w-full ${isDarkMode ? 'bg-[#121422] border-white/10 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'} rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm`}
                   />
                 </div>
                 <div className="flex gap-2">
                     <button 
                         onClick={handleSave}
-                        className="flex-1 flex items-center justify-center gap-2 py-3 bg-rose-500 hover:bg-rose-400 text-white rounded-xl font-bold shadow-lg shadow-rose-500/20 transition-all active:scale-95"
+                        className="flex-1 flex items-center justify-center gap-2 py-3 bg-indigo-500 hover:bg-indigo-400 text-white rounded-xl font-bold transition-all active:scale-95 text-sm"
                     >
                         <Check size={18} />
                         <span>Save</span>
                     </button>
                     <button 
                         onClick={() => setIsEditing(false)}
-                        className="px-6 py-3 bg-slate-900 text-slate-300 rounded-xl font-bold hover:bg-slate-800 transition-all border border-white/5"
+                        className={`px-6 py-3 ${isDarkMode ? 'bg-[#121422] text-slate-300 hover:bg-[#2a2d46] border-white/10' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border-slate-200'} rounded-xl font-bold transition-all border text-sm`}
                     >
                         Cancel
                     </button>
@@ -146,15 +147,15 @@ export default function DetailPanel({
               </div>
             ) : (
               <div className="group relative">
-                <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-2 ${selectedType === 'person' ? 'bg-rose-500/10 text-rose-400' : 'bg-teal-500/10 text-teal-400'}`}>
+                <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-2 ${selectedType === 'person' ? 'bg-indigo-500/10 text-indigo-400' : 'bg-purple-500/10 text-purple-400'}`}>
                   {selectedType}
                 </span>
-                <h2 className="text-3xl font-serif font-bold text-white tracking-tight leading-tight">{selectedItem.name}</h2>
-                <p className="text-slate-400 text-lg font-mono tracking-tighter">{selectedType === 'person' ? (selectedItem as Person).role : (selectedItem as Skill).category}</p>
+                <h2 className={`text-3xl font-serif font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'} tracking-tight leading-tight`}>{selectedItem.name}</h2>
+                <p className={`${isDarkMode ? 'text-slate-400' : 'text-slate-600'} text-lg font-mono tracking-tighter`}>{selectedType === 'person' ? (selectedItem as Person).role : (selectedItem as Skill).category}</p>
                 
                 <button 
                   onClick={() => setIsEditing(true)}
-                  className="mt-6 flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-rose-400 transition-colors bg-slate-900/50 px-4 py-2 rounded-lg border border-white/5 hover:border-rose-500/50 group"
+                  className={`mt-6 flex items-center gap-2 text-sm font-semibold transition-colors ${isDarkMode ? 'text-slate-500 hover:text-indigo-400 bg-[#121422] border-white/5 hover:border-indigo-500/50' : 'text-slate-600 hover:text-indigo-600 bg-slate-50 border-slate-200 hover:border-indigo-200'} px-4 py-2 rounded-lg border group`}
                 >
                   <Edit3 size={16} className="group-hover:rotate-12 transition-transform" />
                   Edit Detail
@@ -171,9 +172,9 @@ export default function DetailPanel({
             </h3>
             <div className="grid grid-cols-3 gap-2">
                 {Object.entries(PROFICIENCY_COLORS).map(([lvl, info]) => (
-                    <div key={lvl} className={`p-3 rounded-2xl border border-slate-800/50 bg-slate-800/20 flex flex-col items-center justify-center`}>
+                    <div key={lvl} className={`p-3 rounded-2xl border ${isDarkMode ? 'border-white/5 bg-[#121422]' : 'border-slate-100 bg-slate-50 shadow-sm'} flex flex-col items-center justify-center`}>
                         <span className={`text-xl font-bold ${info.text}`}>{proficiencyStats[lvl] || 0}</span>
-                        <span className="text-[8px] uppercase font-bold text-slate-500">{info.label}</span>
+                        <span className={`text-[8px] uppercase font-bold ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>{info.label}</span>
                     </div>
                 ))}
             </div>
@@ -202,7 +203,7 @@ export default function DetailPanel({
                 };
 
                 return (
-                  <div key={i} className="group flex items-center justify-between p-4 bg-slate-800/30 rounded-2xl border border-slate-700/30 hover:bg-slate-800/60 hover:border-slate-600 transition-all duration-300">
+                  <div key={i} className={`group flex items-center justify-between p-4 ${isDarkMode ? 'bg-[#121422] border-white/5 hover:bg-[#2a2d46] hover:border-white/10' : 'bg-slate-50 border-slate-200 hover:bg-white hover:border-indigo-200 shadow-sm'} rounded-2xl border transition-all duration-300`}>
                     <div className="flex items-center gap-4">
                       <div className={`w-2 h-2 rounded-full ${style.bg.replace('/10', '')} shadow-[0_0_8px_rgba(0,0,0,0.5)]`} />
                       <div>
@@ -220,7 +221,7 @@ export default function DetailPanel({
                 );
               })}
               {relatedConnections.length === 0 && (
-                <div className="text-center py-8 bg-slate-800/20 rounded-2xl border border-dashed border-slate-700/50">
+                <div className={`text-center py-8 ${isDarkMode ? 'bg-[#121422] border-white/10' : 'bg-slate-50 border-slate-200'} rounded-2xl border border-dashed`}>
                   <p className="text-sm text-slate-500">No active connections found</p>
                 </div>
               )}
