@@ -12,17 +12,14 @@ import {
   Node,
   Background,
   Controls,
-  Panel,
-  MarkerType,
   Handle,
   Position,
-  MiniMap,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import dagre from 'dagre';
 import { GraphData } from '@/lib/types';
 import { getGraphData, getNodePositions, saveNodePositions, saveGraphData } from '@/lib/storage';
-import { Users, Code2, Layers, Trash2, Network, Sun, Plus, Link as LinkIcon, LayoutTemplate, ChevronDown, Moon } from 'lucide-react';
+import { Trash2, Network, Sun, Plus, Link as LinkIcon, LayoutTemplate, ChevronDown, Moon } from 'lucide-react';
 import DetailPanel from './DetailPanel';
 import CRUDPanel from './CRUDPanel';
 import SummaryPanel from './SummaryPanel';
