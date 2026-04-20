@@ -11,6 +11,7 @@ interface DetailPanelProps {
   selectedType: 'person' | 'skill' | null;
   data: GraphData;
   onUpdate: (updatedData: GraphData) => void;
+  isDarkMode?: boolean;
 }
 
 const PROFICIENCY_COLORS: Record<string, { bg: string; text: string; label: string }> = {
